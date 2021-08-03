@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_charts/bar_chart.dart';
-import 'package:flutter_charts/line_chart.dart';
-import 'package:flutter_charts/pie_chart.dart';
+
+import 'bar_chart.dart';
+import 'line_chart.dart';
+import 'pie_chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -29,7 +30,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   Widget _buildCard(String assetUrl, String title, int index) {
     final double deviceHeight = MediaQuery.of(context).size.height;
     return SizedBox(
@@ -40,25 +40,13 @@ class _MyHomePageState extends State<MyHomePage> {
           onTap: () {
             if (index == 1) {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BarChart()
-                )
-              );
+                  context, MaterialPageRoute(builder: (context) => BarChart()));
             } else if (index == 2) {
-              Navigator.push(
-                context, 
-                MaterialPageRoute(
-                  builder: (context) => LineChart()
-                )
-              );
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LineChart()));
             } else if (index == 3) {
               Navigator.push(
-                context, 
-                MaterialPageRoute(
-                  builder: (context) => PieChart()
-                )
-              );
+                  context, MaterialPageRoute(builder: (context) => PieChart()));
             }
           },
           child: Stack(
@@ -66,13 +54,12 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 height: deviceHeight * 0.3,
                 decoration: BoxDecoration(
-                  color: Colors.black,
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.dstATop),
-                    image: AssetImage(assetUrl)
-                  )
-                ),
+                    color: Colors.black,
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        colorFilter: new ColorFilter.mode(
+                            Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                        image: AssetImage(assetUrl))),
               ),
               Container(
                 margin: EdgeInsets.only(top: deviceHeight * 0.125),
@@ -81,10 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 29
-                  ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 29),
                 ),
               )
             ],
@@ -97,16 +83,25 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title), centerTitle: true,),
+      appBar: AppBar(
+        title: Text(widget.title),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             _buildCard('assets/images/barchart.jpg', 'Bar-Chart Example', 1),
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             _buildCard('assets/images/linechart.png', 'Line-Chart Example', 2),
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             _buildCard('assets/images/piechart.jpg', 'Pie-Chart Example', 3)
           ],
         ),

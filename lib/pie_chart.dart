@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter_charts/grades_data.dart';
+
+import 'grades_data.dart';
 
 class PieChart extends StatelessWidget {
-
-
   final data = [
     GradesData('A', 190),
     GradesData('B', 230),
@@ -18,12 +16,12 @@ class PieChart extends StatelessWidget {
   _getSeriesData() {
     List<charts.Series<GradesData, String>> series = [
       charts.Series(
-        id: "Grades",
-        data: data,
-        labelAccessorFn: (GradesData row, _) => '${row.gradeSymbol}: ${row.numberOfStudents}',
-        domainFn: (GradesData grades, _) => grades.gradeSymbol,
-        measureFn: (GradesData grades, _) => grades.numberOfStudents
-      )
+          id: "Grades",
+          data: data,
+          labelAccessorFn: (GradesData row, _) =>
+              '${row.gradeSymbol}: ${row.numberOfStudents}',
+          domainFn: (GradesData grades, _) => grades.gradeSymbol,
+          measureFn: (GradesData grades, _) => grades.numberOfStudents)
     ];
     return series;
   }
@@ -31,7 +29,10 @@ class PieChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Pie Chart"), centerTitle: true,),
+      appBar: AppBar(
+        title: Text("Pie Chart"),
+        centerTitle: true,
+      ),
       body: Center(
         child: Container(
           height: 400,
@@ -44,21 +45,20 @@ class PieChart extends StatelessWidget {
                   Text(
                     "Grades of the students of school in the calendar year",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Expanded(
-                    child: new charts.PieChart(
+                    child: new charts.PieChart<String>(
                       _getSeriesData(),
                       animate: true,
                       defaultRenderer: new charts.ArcRendererConfig(
-                        arcWidth: 60,
-                        arcRendererDecorators: [new charts.ArcLabelDecorator()]
-                      ),
+                          arcWidth: 60,
+                          arcRendererDecorators: [
+                            new charts.ArcLabelDecorator()
+                          ]),
                     ),
                   )
                 ],
